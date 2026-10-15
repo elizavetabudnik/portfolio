@@ -33,6 +33,7 @@ body{
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+svg{display:block}
 
 .progress{position:fixed;top:0;left:0;height:2px;background:var(--gold);z-index:200;width:0}
 
@@ -455,6 +456,29 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   color:rgba(239,230,211,.5);line-height:1.5;margin-top:6px;
 }
 
+/* Кнопка-ссылка на прототип внутри проекта */
+.proj-link{
+  margin-top:28px;
+  display:inline-flex;align-items:center;gap:12px;
+  padding:16px 28px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  border:1px solid rgba(176,133,74,.7);
+  color:var(--gold);
+  background:rgba(176,133,74,.06);
+  transition:background .35s,color .35s,border-color .35s,transform .35s;
+  cursor:pointer;
+}
+.proj-link:hover{
+  background:var(--gold);color:var(--ink);border-color:var(--gold);
+  transform:translateY(-2px);
+}
+.proj-link svg{
+  width:16px;height:16px;
+  transition:transform .35s;
+}
+.proj-link:hover svg{transform:translate(3px,-3px)}
+
 .proj-img{
   position:relative;overflow:hidden;
   width:100%;
@@ -516,6 +540,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .proj-img.is-phone{max-width:220px;border-radius:36px;padding:11px}
   .proj-img.is-phone::before{width:54px;height:5px;top:17px}
   .proj-img.is-phone img{border-radius:26px}
+  .proj-link{width:100%;justify-content:center}
 }
 
 /* НАВЫКИ */
@@ -617,7 +642,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .format-list li{font-size:16px;padding:18px 0}
 }
 
-/* КОНТАКТЫ */
+/* КОНТАКТЫ — SVG-иконки вместо эмодзи */
 .contact-intro{
   font-family:'Manrope',sans-serif;font-weight:500;
   font-size:clamp(17px,1.8vw,24px);line-height:1.4;
@@ -650,40 +675,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .contact-item:hover .contact-value{color:var(--gold)}
 
-/* SVG-стрелки — не превращаются в эмодзи на iOS */
 .contact-arrow{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:24px;height:24px;
-  color:var(--gold);
-  opacity:.7;
-  transition:opacity .3s,transform .3s;
-  flex-shrink:0;
-}
-.contact-arrow svg{
   width:18px;height:18px;
-  display:block;
+  opacity:.6;flex-shrink:0;
+  color:currentColor;
+  transition:opacity .3s,transform .3s;
 }
-.contact-item:hover .contact-arrow{opacity:1;transform:translateX(2px)}
+.contact-item:hover .contact-arrow{opacity:1;transform:translate(2px,-2px)}
 
 @media(max-width:640px){
   .contact-intro{font-size:17px;margin-bottom:36px}
-  .contact-item{
-    grid-template-columns:1fr auto;
-    align-items:center;
-    gap:6px 14px;
-    padding:20px 0;
-  }
+  .contact-item{grid-template-columns:1fr auto;gap:8px;padding:20px 0}
   .contact-label{grid-column:1/-1}
-  .contact-value{font-size:15px;padding-right:8px}
-  .contact-arrow{
-    align-self:center;
-    width:22px;height:22px;
-  }
-  .contact-arrow svg{
-    width:16px;height:16px;
-  }
+  .contact-value{font-size:15px}
 }
 
 /* OUTRO */
@@ -890,6 +894,7 @@ footer .r{color:var(--gold);text-align:right}
 
   <div class="projects-list" data-reveal>
 
+    <!-- DOMOS — со ссылкой на прототип -->
     <article class="proj" data-proj>
       <div class="proj-head">
         <div class="proj-num">01</div>
@@ -923,6 +928,14 @@ footer .r{color:var(--gold);text-align:right}
               <li>research</li><li>прототип</li><li>позиционирование</li><li>бизнес-модель</li><li>акселератор</li>
             </ul>
 
+            <a class="proj-link" href="https://zelvie04.github.io/domos.github.io/" target="_blank" rel="noopener">
+              Посмотреть прототип
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7"/>
+                <path d="M9 7h8v8"/>
+              </svg>
+            </a>
+
             <div class="proj-qr">
               <div class="proj-qr-box">
                 <img src="img/qr-domos.png" alt="QR DOMOS"
@@ -933,7 +946,7 @@ footer .r{color:var(--gold);text-align:right}
               <div class="proj-qr-note">
                 <span class="qr-label-top">QR-код</span>
                 <span class="qr-label-main">Посмотреть прототип</span>
-                <span class="qr-label-sub">Материалы проекта<br>появятся здесь</span>
+                <span class="qr-label-sub">Отсканируйте камерой<br>или нажмите на ссылку выше</span>
               </div>
             </div>
           </div>
@@ -1263,32 +1276,27 @@ footer .r{color:var(--gold);text-align:right}
     <button class="contact-item" id="copyEmail" type="button">
       <div class="contact-label">Email</div>
       <div class="contact-value">elizaveta.budnik07@gmail.com</div>
-      <div class="contact-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="12" height="12" rx="2"/>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-        </svg>
-      </div>
+      <svg class="contact-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="11" height="11" rx="2"/>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
     </button>
     <a class="contact-item" href="https://t.me/elizavettti" target="_blank" rel="noopener">
       <div class="contact-label">Telegram</div>
       <div class="contact-value">@elizavettti</div>
-      <div class="contact-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M7 17L17 7"/>
-          <path d="M8 7h9v9"/>
-        </svg>
-      </div>
+      <svg class="contact-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17L17 7"/>
+        <path d="M9 7h8v8"/>
+      </svg>
     </a>
     <a class="contact-item" href="img/resume.pdf" target="_blank" rel="noopener">
       <div class="contact-label">Резюме</div>
       <div class="contact-value">Скачать PDF</div>
-      <div class="contact-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 4v14"/>
-          <path d="M6 12l6 6 6-6"/>
-        </svg>
-      </div>
+      <svg class="contact-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4v12"/>
+        <path d="M6 12l6 6 6-6"/>
+        <path d="M4 20h16"/>
+      </svg>
     </a>
   </div>
 </section>
