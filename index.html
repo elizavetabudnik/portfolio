@@ -649,12 +649,36 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   word-break:break-word;transition:color .3s;
 }
 .contact-item:hover .contact-value{color:var(--gold)}
-.contact-arrow{opacity:.6;font-size:18px}
+
+/* стрелка — фикс на мобилке: больше не «тикер», а аккуратный уголок */
+.contact-arrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;height:22px;
+  font-size:14px;
+  line-height:1;
+  opacity:.55;
+  transition:opacity .3s,transform .3s;
+  flex-shrink:0;
+}
+.contact-item:hover .contact-arrow{opacity:1;transform:translateX(2px)}
+
 @media(max-width:640px){
   .contact-intro{font-size:17px;margin-bottom:36px}
-  .contact-item{grid-template-columns:1fr auto;gap:8px;padding:20px 0}
+  .contact-item{
+    grid-template-columns:1fr auto;
+    align-items:start;
+    gap:6px 14px;
+    padding:20px 0;
+  }
   .contact-label{grid-column:1/-1}
-  .contact-value{font-size:15px}
+  .contact-value{font-size:15px;padding-right:8px}
+  .contact-arrow{
+    align-self:center;
+    width:18px;height:18px;
+    font-size:12px;
+  }
 }
 
 /* OUTRO */
