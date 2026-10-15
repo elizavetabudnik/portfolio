@@ -650,17 +650,20 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .contact-item:hover .contact-value{color:var(--gold)}
 
-/* стрелка — фикс на мобилке: больше не «тикер», а аккуратный уголок */
+/* SVG-стрелки — не превращаются в эмодзи на iOS */
 .contact-arrow{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:22px;height:22px;
-  font-size:14px;
-  line-height:1;
-  opacity:.55;
+  width:24px;height:24px;
+  color:var(--gold);
+  opacity:.7;
   transition:opacity .3s,transform .3s;
   flex-shrink:0;
+}
+.contact-arrow svg{
+  width:18px;height:18px;
+  display:block;
 }
 .contact-item:hover .contact-arrow{opacity:1;transform:translateX(2px)}
 
@@ -668,7 +671,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .contact-intro{font-size:17px;margin-bottom:36px}
   .contact-item{
     grid-template-columns:1fr auto;
-    align-items:start;
+    align-items:center;
     gap:6px 14px;
     padding:20px 0;
   }
@@ -676,8 +679,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .contact-value{font-size:15px;padding-right:8px}
   .contact-arrow{
     align-self:center;
-    width:18px;height:18px;
-    font-size:12px;
+    width:22px;height:22px;
+  }
+  .contact-arrow svg{
+    width:16px;height:16px;
   }
 }
 
@@ -1258,17 +1263,32 @@ footer .r{color:var(--gold);text-align:right}
     <button class="contact-item" id="copyEmail" type="button">
       <div class="contact-label">Email</div>
       <div class="contact-value">elizaveta.budnik07@gmail.com</div>
-      <div class="contact-arrow">⧉</div>
+      <div class="contact-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="12" height="12" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </div>
     </button>
     <a class="contact-item" href="https://t.me/elizavettti" target="_blank" rel="noopener">
       <div class="contact-label">Telegram</div>
       <div class="contact-value">@elizavettti</div>
-      <div class="contact-arrow">↗</div>
+      <div class="contact-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17L17 7"/>
+          <path d="M8 7h9v9"/>
+        </svg>
+      </div>
     </a>
     <a class="contact-item" href="img/resume.pdf" target="_blank" rel="noopener">
       <div class="contact-label">Резюме</div>
       <div class="contact-value">Скачать PDF</div>
-      <div class="contact-arrow">↓</div>
+      <div class="contact-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 4v14"/>
+          <path d="M6 12l6 6 6-6"/>
+        </svg>
+      </div>
     </a>
   </div>
 </section>
